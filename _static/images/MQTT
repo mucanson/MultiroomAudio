@@ -1,0 +1,14 @@
+Kiến trúc mức cao (high-level) của MQTT gồm 2 phần chính là Broker và Clients.
+
+https://www.youtube.com/watch?v=oOny8AIX2aI //Bài giảng tiếng việt            Robot cho mọi người  (server trên MQTT amazon)
+
+https://github.com/kysuiot/hoc-iot/blob/master/01_esp32_webserver/src/main.cpp // clone code
+
+https://www.youtube.com/watch?v=5tG3JXFYrUo //Bài giảng tiếng anh ***
+
+
+https://www.youtube.com/watch?v=LvzCeBce2mU //Bài giảng tiếng anh*
+
+
+
+https://www.youtube.com/watch?v=4SEO5xR_FLE IO TECH BUGS

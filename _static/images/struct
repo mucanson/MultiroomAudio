@@ -1,0 +1,13 @@
+Struct với truyền biến cấu trúc vào hàm
+
+cách 1: truyền địa chỉ(*)
+
+
+cách 2: truyền giá trị
+
+
+đầu vào là struct, đầu ra là enum
+
+dùng con trỏ hàm
+
+viết giống MQTT

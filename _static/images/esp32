@@ -1,0 +1,75 @@
+MQTT kết nối với Amazon
+Include thư viện
+    stdio.h: Cung cấp cốt lõi của những khả năng nhập trong C. Tập tin này bao gồm họ hàm printf.
+    freertos/FreeRTOS.h: Thư viện này bao gồm các thiết lập cấu hình yêu cầu để chạy freeRTOS trên ESP32.
+    freertos/task.h: Cung cấp chức năng đa nhiệm. (Chúng tôi sẽ làm đa nhiệm ở các ví dụ sau)
+    esp_system.h: Bao gồm cấu hình các thiết bị ngoại vi trong hệ thống ESP. Chức năng của nó như là hệ thống khởi tạo.
+Hướng dẫn config, nạp và debug chương trình: 
+    make menuconfig: Câu lệnh này sẽ hiển hiện ra một menu để cấu hình ESP32 như: Lựa chọn com port, lựa chọn tốc độ baud rate, ...
+    make flash: Câu lệnh này biên dịch và đổ chương trình xuống esp32
+    make monitor: Câu lệnh này cho phép nạp và debug chương trình
+    make simple_monitor: Câu lệnh này cho phép debug chương trình
+    make help: Còn nhiều lệnh khác xem trong đây.
+
+
+Lập trình chớp tắt LED với ESP32 bằng ESP-IDF:
+
+
+
+make clean
+make -j8
+make flash
+make monitor
+
+pyserial==3.0
+future>=0.15.2
+cryptography>=2.1.4
+pyparsing>=2.0.3,<2.4.0
+
+
+Toolchain version: esp-2020r3
+Compiler version: 8.4.0
+
+
+https://github.com/wolfeidau/esp32-blufi-demo
+
+https://desire.giesecke.tk/index.php/2018/04/06/esp32-wifi-setup-over-ble/
+
+
+git checkout release/v4.1
+
+git submodule update --init --recursive
+
+git status
+
+git reset --hard
+
+rm -rf examples/ledws2812/ examples/queue_at/
+
+
+FIX lỗi blufiesp:
+
+void btc_blufi_send_encap(uint8_t type, uint8_t *data, int total_data_len)
+
+https://github.com/espressif/esp-idf/issues/5792#
+
+If it is urgent, can you make such modification temporarily? We are doing further analysis.
+
+components/bt/host/bluedroid/btc/profile/esp/blufi/blufi_prf.c
+
+esp_ble_get_cur_sendable_packets_num(blufi_env.conn_id) -> esp_ble_get_sendable_packets_num()
+
+
+
+void wifi_config_stt(void)
+{
+  wifi_config_t wifi_config_sst = {
+      .sta = {
+          .ssid = SST_WIFI_SSID,
+          .password = SST_WIFI_PASS,
+      },
+  };
+  ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
+  ESP_ERROR_CHECK(esp_wifi_set_config(ESP_IF_WIFI_STA, &wifi_config_sst));
+  ESP_LOGI(TAG, "connected to ap SSID:%s password:%s", SST_WIFI_SSID, SST_WIFI_PASS);
+}
